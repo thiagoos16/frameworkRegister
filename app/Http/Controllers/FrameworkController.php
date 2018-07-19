@@ -32,4 +32,16 @@ class FrameworkController extends Controller
     public function findById($id) {
         return Framework::find($id);
     }
+
+    public function existsFrameworkName($name) {
+        return Framework::where('name', $name);
+    }
+
+    public function existsFrameworkSite($site) {
+        return Framework::where('site', $site);
+    }
+
+    public function existsFramework($id) {
+        return Framework::find($id);
+    }
 }
