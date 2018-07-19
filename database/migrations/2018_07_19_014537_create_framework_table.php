@@ -16,9 +16,9 @@ class CreateFrameworkTable extends Migration
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         Schema::create('framework', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name')->unique();
+            $table->string('name');
             $table->string('url_image');
-            $table->string('site')->unique();
+            $table->string('site');
             $table->integer('year_creation');
             $table->string('creator');
             $table->string('latest_stable_release');
