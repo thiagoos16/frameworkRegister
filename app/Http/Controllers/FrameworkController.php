@@ -8,7 +8,20 @@ use App\Framework;
 class FrameworkController extends Controller 
 {
     public function index() {
-        return Framework::all();
+        $frameworks_aux = Framework::all();
+        $frameworks = [];
+
+        foreach($frameworks_aux as $framework) {
+            $language = $framework->programmingLanguage()->where('id', $framework->id_language)->first();
+            
+            $temp_framework = $framework;
+            
+            $temp_framework['language'] = $language->name;
+
+            $frameworks = $temp_framework;
+        }
+
+        return $frameworks;
     }
 
     public function create(Request $request) {
