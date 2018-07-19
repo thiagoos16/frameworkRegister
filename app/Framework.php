@@ -12,6 +12,6 @@ class Framework extends Model
                             'latest_stable_release', 'type', 'opinion', 'pros_cons', 'id_language'];
 
     public function programmingLanguage() {
-        return $this->belongTo('App\ProgrammingLanguage', 'id_language');
+        return $this->belongsTo('App\ProgrammingLanguage', 'id_language');
     }
 }
