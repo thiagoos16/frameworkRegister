@@ -17,7 +17,7 @@ Route::get('/', function () {
 
 Route::group(['prefix' => 'language'], function () {
     Route::get('/', 'ProgrammingLanguageController@index');
-    Route::post('/new', 'ProgrammingLanguageController@create');
-    Route::get('/edit/{id}', 'ProgrammingLanguageController@update');
-    Route::get('/delete/{id}', 'ProgrammingLanguageController@delete');
+    Route::post('/', 'ProgrammingLanguageController@create');
+    Route::put('/{id}', 'ProgrammingLanguageController@update');
+    Route::delete('/{id}', 'ProgrammingLanguageController@delete');
 });

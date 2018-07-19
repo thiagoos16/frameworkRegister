@@ -20,7 +20,7 @@ class ProgrammingLanguageController extends Controller
     public function update(Request $request, $id) {
         ProgrammingLanguage::find($id)->update($request->all());
 
-        return $request->all();
+        return ProgrammingLanguage::find($id);
     }
 
     public function delete($id) {
