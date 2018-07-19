@@ -15,16 +15,19 @@ class ProgrammingLanguageController extends Controller
     public function create(Request $request) {
         if (is_null($this->existsLanguageName($request->name))) {
             ProgrammingLanguage::create($request->all());
-            return Response('Programming Language Registered with Success!', 200); 
+            return Response('Programming Language Registered with Success!', 201); 
         } else {
-            return Response('Make sure the name is already in the language already registered!', 409);
+            return Response('Was not possible to register language. Make sure this language name is not already registered!', 409);
         }
     }
 
     public function update(Request $request, $id) {
-        ProgrammingLanguage::find($id)->update($request->all());
-
-        return ProgrammingLanguage::find($id);
+        if (is_null($this->existsLanguageName($request->name))) {
+            ProgrammingLanguage::find($id)->update($request->all());
+            return Response('Programming Language Updated with Success!', 200);
+        } else {
+            return Response('Was not possible to update language. Make sure this language name is not already registered!', 409);
+        }
     }
 
     public function delete($id) {
