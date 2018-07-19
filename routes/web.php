@@ -14,3 +14,10 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::group(['prefix' => 'language'], function () {
+    Route::get('/', 'ProgrammingLanguageController@index');
+    Route::post('/new', 'ProgrammingLanguageController@create');
+    Route::get('/edit/{id}', 'ProgrammingLanguageController@update');
+    Route::get('/delete/{id}', 'ProgrammingLanguageController@delete');
+});
