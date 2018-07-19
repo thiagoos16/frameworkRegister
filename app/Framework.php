@@ -10,4 +10,8 @@ class Framework extends Model
 
     protected $fillable = ['name', 'url_name', 'site', 'year_creation', 'creator', 
                             'latest_stable_release', 'type', 'opinion', 'pros_cons'];
+
+    public function programmingLanguage() {
+        return $this->belongTo('App\ProgrammingLanguage');
+    }
 }

@@ -9,4 +9,8 @@ class ProgrammingLanguage extends Model
     protected $table = 'programming_language';
 
     protected $fillable = ['name'];
+
+    public function frameworks() {
+        return $this->hasMany('App\Framework');
+    }
 }
