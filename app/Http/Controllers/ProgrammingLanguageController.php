@@ -28,4 +28,8 @@ class ProgrammingLanguageController extends Controller
 
         return ProgrammingLanguage::all();
     }
+
+    public function findById($id) {
+        return ProgrammingLanguage::find($id);
+    }
 }
