@@ -31,9 +31,13 @@ class ProgrammingLanguageController extends Controller
     }
 
     public function delete($id) {
-        ProgrammingLanguage::find($id)->delete();
+        if ($this->existsLanguage($id)) {
+            ProgrammingLanguage::find($id)->delete();
 
-        return ProgrammingLanguage::all();
+            return Response('Programming Language Deleted with Success!', 200);
+        } else {
+            return Response('Programming Language not Found.', 200); 
+        }
     }
 
     public function findById($id) {
@@ -42,5 +46,9 @@ class ProgrammingLanguageController extends Controller
 
     public function existsLanguageName($name) {
         return ProgrammingLanguage::where('name', $name)->first(); 
+    }
+
+    public function existsLanguage($id) {
+        return ProgrammingLanguage::find($id); 
     }
 }
