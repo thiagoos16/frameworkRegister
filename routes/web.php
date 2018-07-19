@@ -22,3 +22,11 @@ Route::group(['prefix' => 'language'], function () {
     Route::put('/{id}', 'ProgrammingLanguageController@update');
     Route::delete('/{id}', 'ProgrammingLanguageController@delete');
 });
+
+Route::group(['prefix' => 'framework'], function () {
+    Route::get('/', 'FrameworkController@index');
+    Route::get('/{id}', 'FrameworkController@findById');
+    Route::post('/', 'FrameworkController@create');
+    Route::put('/{id}', 'FrameworkController@update');
+    Route::delete('/{id}', 'FrameworkController@delete');
+});
