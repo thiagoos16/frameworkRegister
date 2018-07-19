@@ -46,13 +46,23 @@ class FrameworkController extends Controller
     }
 
     public function delete($id) {
-        Framework::find($id)->delete();
-
-        return Framework::all();
+        if ($this->existsFramework($id)) {
+            Framework::find($id)->delete();
+            return Response('Framework Deleted with Success!', 200);
+        } else {
+            return Response('Framework not Found.', 200); 
+        }
     }
 
     public function findById($id) {
-        return Framework::find($id);
+        if ($this->existsFramework($id)) {
+            $framework = Framework::find($id);
+            $language = $framework->programmingLanguage()->where('id', $framework->id_language)->first();
+            $framework['language'] = $language->name;
+            return $framework;
+        } else {
+            return Response('Framework not Found.', 200); 
+        }
     }
 
     public function existsFrameworkName($name) {
