@@ -37,9 +37,12 @@ class FrameworkController extends Controller
     }
 
     public function update(Request $request, $id) {
-        Framework::find($id)->update($request->all());
-
-        return Framework::find($id);
+        if (!is_null($this->existsLanguage($request->id_language))) {
+            Framework::find($id)->update($request->all());
+            return Response('Framework Updated with Success!', 200); 
+        } else {
+            return Response('Was not possible to update Framework. Make sure this Framework Name and Site is not already registered. Make sure the language exists in database.', 409);
+        }
     }
 
     public function delete($id) {
