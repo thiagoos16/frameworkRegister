@@ -26,6 +26,7 @@ Route::group(['prefix' => 'language'], function () {
 Route::group(['prefix' => 'framework'], function () {
     Route::get('/', 'FrameworkController@index');
     Route::get('/{id}', 'FrameworkController@findById');
+    Route::get('/listByLanguage/{id_language}', 'FrameworkController@listByLanguage');
     Route::post('/', 'FrameworkController@create');
     Route::put('/{id}', 'FrameworkController@update');
     Route::delete('/{id}', 'FrameworkController@delete');

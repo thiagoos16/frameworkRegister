@@ -29,12 +29,6 @@ class FrameworkController extends Controller
         if (is_null($this->existsFrameworkName($request->name)) && 
             is_null($this->existsFrameworkSite($request->site)) && 
             !is_null($this->existsLanguage($request->id_language))) {
-            
-            // $image = (isset($request->image) ? isset($request->image): null);
-
-            // if (!is_null($image)) {
-            //    $request->url_image = $this->urlImage($image);
-            // }
 
             return Framework::create($request->only(['name', 'url_image', 'site', 'year_creation',
                                                      'creator', 'latest_stable_release', 'type',
@@ -101,5 +95,23 @@ class FrameworkController extends Controller
         $pathToStore = '../images/framework' . $n_rand1 . '-image_' . $n_rand2 . '.' . $extension; 
         
         return $pathToStore;
+    }
+
+    public function listByLanguage($id_language) {
+        $frameworks_list = Framework::where('id_language', $id_language)->get();
+
+        $frameworks = [];
+
+        foreach($frameworks_list as $framework) {
+            $language = $framework->programmingLanguage()->where('id', $framework->id_language)->first();
+            
+            $temp_framework = $framework;
+            
+            $temp_framework['language'] = $language->name;
+
+            $frameworks[] = $temp_framework;
+        }
+
+        return $frameworks;
     }
 }
