@@ -30,7 +30,15 @@ class FrameworkController extends Controller
             is_null($this->existsFrameworkSite($request->site)) && 
             !is_null($this->existsLanguage($request->id_language))) {
             
-            return Framework::create($request->all()); 
+            // $image = (isset($request->image) ? isset($request->image): null);
+
+            // if (!is_null($image)) {
+            //    $request->url_image = $this->urlImage($image);
+            // }
+
+            return Framework::create($request->only(['name', 'url_image', 'site', 'year_creation',
+                                                     'creator', 'latest_stable_release', 'type',
+                                                     'opinion', 'pros_cons', 'id_language'])); 
         } else {
             return Response('Was not possible to register Framework. Make sure this Framework Name and Site is not already registered. Make sure the language exists in database.', 409);
         }
@@ -79,5 +87,19 @@ class FrameworkController extends Controller
 
     public function existsLanguage($id_language) {
         return ProgrammingLanguage::find($id_language);
+    }
+
+    public function urlImage($image) {
+        $extension = $image->getClientOriginalExtension();
+        
+        $n_rand1 = rand(10, 999);
+        $n_rand2 = rand(9999, 99999);
+        
+        $pathToMove = public_path().'/images/framework' . $n_rand1 . '-image_' . $n_rand2 . '.' . $extension;
+        File::move($image_temp, $pathToMove);
+        
+        $pathToStore = '../images/framework' . $n_rand1 . '-image_' . $n_rand2 . '.' . $extension; 
+        
+        return $pathToStore;
     }
 }
