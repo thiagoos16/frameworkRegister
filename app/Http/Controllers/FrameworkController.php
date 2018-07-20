@@ -29,8 +29,8 @@ class FrameworkController extends Controller
         if (is_null($this->existsFrameworkName($request->name)) && 
             is_null($this->existsFrameworkSite($request->site)) && 
             !is_null($this->existsLanguage($request->id_language))) {
-            Framework::create($request->all());
-            return Response('Framework Registered with Success!', 201); 
+            
+            return Framework::create($request->all()); 
         } else {
             return Response('Was not possible to register Framework. Make sure this Framework Name and Site is not already registered. Make sure the language exists in database.', 409);
         }
