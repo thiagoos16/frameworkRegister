@@ -14,8 +14,7 @@ class ProgrammingLanguageController extends Controller
 
     public function create(Request $request) {
         if (is_null($this->existsLanguageName($request->name))) {
-            ProgrammingLanguage::create($request->all());
-            return Response('Programming Language Registered with Success!', 201); 
+            return ProgrammingLanguage::create($request->all());
         } else {
             return Response('Was not possible to register language. Make sure this language name is not already registered!', 409);
         }
